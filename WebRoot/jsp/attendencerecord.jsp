@@ -44,26 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="TableHandler" method="post">
     <p>请选择周次：
     <select name="week">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-    <option value="13">13</option>
-    <option value="14">14</option>
-    <option value="15">15</option>
-    <option value="16">16</option>
+    <%for(int i = 1; i <=16; i ++) {%>
+    <option value="<%=i%>">i</option>
+    <%} %>
     </select>
     </p>
-    
-    
+
     <table align="center">
     <tr>
     <th>学号</th>
@@ -87,8 +73,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%} %>
     </tr>
     
-  
-    
     <%! ArrayList<GlobalInfo.StudentInfo> infoList = GlobalInfo.getStudentInfoList(); %>
     <%for(int i = 0; i < infoList.size(); i ++) { %>
     <%GlobalInfo.StudentInfo info = infoList.get(i); %>
@@ -96,19 +80,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td><%=info.getStudentID() %></td>
     <td><%=info.getName() %></td>
     <td><%=info.getClassName() %></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="yuwen<%=i%>"></input></td>
+    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="huibian<%=i%>"></input></td>
     <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="shuxue<%=i%>"></input></td>
     <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="yingyu<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="wuli10<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="huaxue10<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="shengwu10<%=i%>"></input></td>
+    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="wuli<%=i%>"></input></td>
+    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="huaxue<%=i%>"></input></td>
+    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="shengwu<%=i%>"></input></td>
     </tr>
     <%} %>
     
-    
-    
-    
-
     <tr><td colspan="9"><input type="submit" value="提交" /></td></tr>
     </table>
     </form>

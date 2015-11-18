@@ -1,5 +1,7 @@
 package pd;
 
+import da.ProjectDA;
+
 public class Project {
     //¿Î³ÌÃû
 	private String name;

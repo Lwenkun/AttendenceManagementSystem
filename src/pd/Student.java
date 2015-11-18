@@ -2,15 +2,19 @@ package pd;
 
 import java.util.ArrayList;
 
+import da.StudentDA;
+
+
+
 public class Student {
 private String id;//学号
-private String week;//周次
+private int week;//周次
 private String name;//姓名
 private String mClass;//班级
 private ArrayList<Project> projects;//课程
 private float attendenceRate;//出勤率
 
-public Student(String id, String week, String name, String mClass, ArrayList<Project> projects) {
+public Student(String id, int week, String name, String mClass, ArrayList<Project> projects) {
 	this.id = id;
 	this.week = week;
 	this.name = name;
@@ -23,7 +27,7 @@ public int getWeek() {
 public void setWeek(int week) {
 	this.week = week;
 }
-public int getId() {
+public String getId() {
 	return id;
 }
 
@@ -39,7 +43,7 @@ public float getAttendenceRate() {
 	return attendenceRate;
 }
 
-public void setId(int id) {
+public void setId(String id) {
 	this.id = id;
 }
 
