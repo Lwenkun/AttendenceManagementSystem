@@ -6,9 +6,16 @@ public class Project {
 	//本门课程在某一周到课率
 	private float attendenceRate;
 	//周数
-	private int week;
+	private String week;
 	//当前周的数量
-	private int num;
+	private String num;
+	
+	public Project(String name, float attendenceRate, String week, String num) {
+		this.name = name;
+		this.attendenceRate = attendenceRate;
+		this.week = week;
+		this.num = num;
+	}
 	
 	public String getName() {
 		return name;

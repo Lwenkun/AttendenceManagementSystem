@@ -3,12 +3,20 @@ package pd;
 import java.util.ArrayList;
 
 public class Student {
-private int id;//学号
-private int week;//周次
+private String id;//学号
+private String week;//周次
 private String name;//姓名
 private String mClass;//班级
 private ArrayList<Project> projects;//课程
 private float attendenceRate;//出勤率
+
+public Student(String id, String week, String name, String mClass, ArrayList<Project> projects) {
+	this.id = id;
+	this.week = week;
+	this.name = name;
+	this.mClass = mClass;
+	this.projects = projects;
+}
 public int getWeek() {
 	return week;
 }

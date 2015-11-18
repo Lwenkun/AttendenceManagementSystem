@@ -5,5 +5,8 @@
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="E:/驱动/java数据库驱动jar包/MySQL_Driver/jdbc2_0-stdext.jar"/>
+	<classpathentry kind="lib" path="E:/驱动/java数据库驱动jar包/MySQL_Driver/mysql-connector-java-3.0.16-ga-bin.jar"/>
+	<classpathentry kind="lib" path="E:/驱动/java数据库驱动jar包/MySQL_Driver/proxool-0.8.3.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
