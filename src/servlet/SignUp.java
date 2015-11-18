@@ -29,14 +29,20 @@ public class SignUp extends HttpServlet {
 		
 		PrintWriter output = resp.getWriter();
 		
-		if(User.find(userName) != null) {
+		if("".equals(userName) || "".equals(password)) {
+			output.println("<script type='text/javascript'>" +
+					"alert('用户名或密码不能为空');" +
+					"window.location.href='" +
+					"http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/signup.jsp" +
+					"';</script>");
+		}
+		else if(User.find(userName) != null) {
 			//弹出对话框，提示用户名已经存在
 			output.println("<script type='text/javascript'>" +
 					"alert('用户名已经存在<br>请换用其他用户名');" +
 					"window.location.href='" +
 					"http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/signup.jsp" +
 					"';</script>");
-			
 		} else {
 			//创建新用户
 			User user = new User(userName, password, identity);
@@ -47,6 +53,6 @@ public class SignUp extends HttpServlet {
 					"http://desktop-6m41rij:8080/Attendnece%20Management%20System/jsp/signup.jsp" +
 					"';</script>");
 		}
+		
 	}
-	
 }

@@ -1,28 +1,21 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<!doctype html>
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'administratorchoice.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+<head>
+<meta charset="utf-8">
+<title>administrator</title>
+<style>
+input{align:center;}
+</style>
+</head>
+<body>
+<h1 align="center">华中科技大学考勤管理系统</h1>
+<h2 align="center">管理员中心</h2>
+<center>
+<input type="button" name="Input" value="录入" onclick="window.location.href='http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/attendencerecord.jsp'"/>
+<input type="button" name="Update" value="查询" onclick="window.location.href='http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/login.jsp'"/>
+</center>
 
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
+
+</body>
 </html>

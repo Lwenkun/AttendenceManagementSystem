@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
 				
 				switch (user.getIdentity()) {
 				case User.ADMINISTRATOR :
-					address = "/jsp/administrator.jsp";
+					address = "/jsp/administratorchoice.jsp";
 					break;
 				case User.COUNSELOR :
 					address = "/jsp/counselor.jsp";

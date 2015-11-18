@@ -30,6 +30,21 @@
   <url-pattern>/SignUp</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <description>表格处理</description>
+  <display-name>TableHandler</display-name>
+  <servlet-name>TableHandler</servlet-name>
+  <servlet-class>servlet.TableHandler</servlet-class>
+  </servlet>
+  
+  
+  
+
+  <servlet-mapping>
+  <servlet-name>TableHandler</servlet-name>
+  <url-pattern>/TableHandler</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>/jsp/login.jsp</welcome-file>
   </welcome-file-list>
