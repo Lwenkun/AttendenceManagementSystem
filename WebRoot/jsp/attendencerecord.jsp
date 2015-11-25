@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <p>请选择周次：
     <select name="week">
     <%for(int i = 1; i <=16; i ++) {%>
-    <option value="<%=i%>">i</option>
+    <option value="<%=i%>"><%=i%></option>
     <%} %>
     </select>
     </p>
@@ -80,12 +80,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td><%=info.getStudentID() %></td>
     <td><%=info.getName() %></td>
     <td><%=info.getClassName() %></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="huibian<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="shuxue<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="yingyu<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="wuli<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="huaxue<%=i%>"></input></td>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="shengwu<%=i%>"></input></td>
+    <%for(int j = 0; j < projects.size(); j++) {%>
+    <%String project = projects.get(j); %>
+    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="<%=project + j%>"></input></td>
+    <%} %>
     </tr>
     <%} %>
     

@@ -23,6 +23,7 @@ public class SignUp extends HttpServlet {
 		userName = req.getParameter("userName");
 		password = req.getParameter("password");
 		identity = req.getParameter("identity");
+		
 		if("老师".equals(identity)) {
 			identity = req.getParameter("type") + "老师";
 		}
@@ -31,7 +32,7 @@ public class SignUp extends HttpServlet {
 		
 		if("".equals(userName) || "".equals(password)) {
 			output.println("<script type='text/javascript'>" +
-					"alert('用户名或密码不能为空');" +
+					"alert('Username or password cannot be empty!');" +
 					"window.location.href='" +
 					"http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/signup.jsp" +
 					"';</script>");
@@ -39,7 +40,7 @@ public class SignUp extends HttpServlet {
 		else if(User.find(userName) != null) {
 			//弹出对话框，提示用户名已经存在
 			output.println("<script type='text/javascript'>" +
-					"alert('用户名已经存在<br>请换用其他用户名');" +
+					"alert('Sorry,but the name had been already registered \n Please change a name');" +
 					"window.location.href='" +
 					"http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/signup.jsp" +
 					"';</script>");
@@ -48,7 +49,7 @@ public class SignUp extends HttpServlet {
 			User user = new User(userName, password, identity);
 			user.add();
 			output.println("<script type='text/javascript'>" +
-					"alert('注册成功!');" +
+					"alert('Congratulation! Register Successfully!');" +
 					"window.location.href='" +
 					"http://desktop-6m41rij:8080/Attendnece%20Management%20System/jsp/signup.jsp" +
 					"';</script>");

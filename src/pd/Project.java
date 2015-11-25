@@ -12,13 +12,23 @@ public class Project {
 	//当前周的数量
 	private String num;
 	
-	public Project(String name, float attendenceRate, String week, String num) {
+	/**
+	 * 
+	 * @param name
+	 * @param attendenceRate
+	 * @param week
+	 * @param num
+	 */
+	public Project(String name, String week, String num) {
 		this.name = name;
-		this.attendenceRate = attendenceRate;
 		this.week = week;
 		this.num = num;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
