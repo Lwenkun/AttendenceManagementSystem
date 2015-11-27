@@ -37,9 +37,6 @@
   <servlet-class>servlet.TableHandler</servlet-class>
   </servlet>
   
-  
-  
-
   <servlet-mapping>
   <servlet-name>TableHandler</servlet-name>
   <url-pattern>/TableHandler</url-pattern>

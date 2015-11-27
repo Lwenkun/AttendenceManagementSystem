@@ -11,10 +11,9 @@ public class ProjectDA {
 	private static Connection aConnection;
 	private static Statement aStatement;
 	
-	private static int subjectID;
 	private static int week;
-	private static int expectNumber;
-	private static String subjectName;
+	private static int num;
+	private static String name;
 	
 	public static Connection initialize() {
 		try {
@@ -39,12 +38,12 @@ public class ProjectDA {
 		}
 	}
 	
-	public static Project find(int key) throws NotFoundException {
+	public static Project find(String key) throws NotFoundException {
 		//
 		aProject = null;
 		// define the SQl query statement using the phone number key
 
-		String sql = "SELECT * FROM subject" + " WHERE subjectID = " + key;
+		String sql = "SELECT * FROM project" + " WHERE name = " + key;
 		//
 		try {
 			ResultSet rs = aStatement.executeQuery(sql);
@@ -53,12 +52,12 @@ public class ProjectDA {
 			boolean gotIt = rs.next();
 			if (gotIt) {
 				//
-				subjectID = rs.getInt("subjectID");
+				name = rs.getString("name");
 				week = rs.getInt("week");
-				expectNumber = rs.getInt("expectNumber");
-				subjectName = rs.getString("subjectName");
-
+				num = rs.getInt("num");
+				
 				//
+				aProject = new Project(name, week, num);
 			} else {
 				throw (new NotFoundException("没有找到此课程！"));
 			}
@@ -70,36 +69,44 @@ public class ProjectDA {
 	}
 	
 	public static void add(Project project) throws DuplicateException{
-		subjectID = project.getId();
-		week = project.getWeek();
-		expectNumber = project.getExpectNumber();
-		subjectName = project.getName();
 		
-		String sql = "INSERT INTO subject (week,expectNumber,subjectName)VALUES (" 
-		+ week + "," + expectNumber + ",'" + subjectName +"')";
+		week = project.getWeek();
+		num = project.getNum();
+		name = project.getName();
+		
+		String sql = "INSERT INTO project (week,num,name) VALUES ("
+		+ week + "','" + num + "','" + name + "')";
 		
 		System.out.println(sql);
 		
 		try{
-			aProject = find(subjectID);
-		}catch(NotFoundException e){
+			
+			aProject = find(name);
+			
+		}catch(NotFoundException e){ 
+			
 			try{
+				
 				int result = aStatement.executeUpdate(sql);
+				
 			}catch(SQLException ee){
+				
 				System.out.println(ee);
+				
 			}
 		}
 	}
 
 	public static void update(Project project) throws NotFoundException {
-		subjectID = project.getID();
-		subjectName = project.getName();
-		week = project.getName();
-		expectNumber = project.getExpectNumber();
+		
+		name = project.getName();
+		week = project.getWeek();
+		num = project.getNum();
 
-		String sql = "UPDATE Subject SET subjectName = '" + subjectName + "'," 
-		+ "week = " + week + "," + "expectNumber = " + expectNumber 
-		+ "WHERE subjectID = " + subjectID;
+		String sql = "UPDATE Subject SET name = '" + name + "'," 
+		+ "week = " + week + "," 
+				+ "num = '" + num + "'" +
+		"WHERE name = '" + name + "'";
 
 		try {
 			int result = aStatement.executeUpdate(sql);

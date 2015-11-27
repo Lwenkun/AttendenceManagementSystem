@@ -1,7 +1,10 @@
 package pd;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import da.DuplicateException;
+import da.NotFoundException;
 import da.StudentDA;
 
 
@@ -11,15 +14,15 @@ private String id;//学号
 private int week;//周次
 private String name;//姓名
 private String mClass;//班级
-private ArrayList<Project> projects;//课程
+private Map<String, Integer> attMap;//课程
 private float attendenceRate;//出勤率
 
-public Student(String id, int week, String name, String mClass, ArrayList<Project> projects) {
+public Student(String id, int week, String name, String mClass, Map<String, Integer> attMap) {
 	this.id = id;
 	this.week = week;
 	this.name = name;
 	this.mClass = mClass;
-	this.projects = projects;
+	this.attMap = attMap;
 }
 public int getWeek() {
 	return week;
@@ -37,6 +40,10 @@ public String getName() {
 
 public String getmClass() {
 	return mClass;
+}
+
+public Map<String, Integer> getAttMap() {
+	return attMap;
 }
 
 public float getAttendenceRate() {
@@ -59,15 +66,15 @@ public static void calAttendenceRate() {
 	
 }
 
-public void add() {
+public void add() throws DuplicateException {
 	StudentDA.add(this);
 }
 
-public static Student find(String name) {
+public static Student find(String name) throws NotFoundException {
 	return StudentDA.find(name);
 }
 
-public  void update() {
+public void update() throws NotFoundException {
 	StudentDA.update(this);
 }
 

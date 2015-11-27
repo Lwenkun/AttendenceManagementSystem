@@ -1,5 +1,9 @@
 package pd;
 
+import da.DuplicateException;
+import da.NotFoundException;
+import da.UserDA;
+
 public class User {
 	public static final String TEACHER = "老师";
 	public static final String ADMINISTRATOR = "管理员";
@@ -28,19 +32,19 @@ public class User {
 		return identity;
 	}
 	
-	public void initialize() {
+	public static void initialize() {
 		UserDA.initialize();
 	}
 	
-	public void terminate() {
+	public static void terminate() {
 		UserDA.terminate();
 	}
 	
-	public void add() {
+	public void add() throws DuplicateException {
 		UserDA.add(this);
 	}
 
-	public static User find(String userName) {
+	public static User find(String userName) throws NotFoundException {
 		return UserDA.find(userName);
 	}
 }

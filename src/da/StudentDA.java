@@ -4,6 +4,7 @@ import java.net.PasswordAuthentication;
 import java.security.interfaces.RSAKey;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 import pd.Student;
 
@@ -14,9 +15,9 @@ public class StudentDA {
 	private static Connection aConnection;
 	private static Statement aStatement;
 	//
-	private static int id; // ！学生ID是整形！需要注意
+	private static String studentID; // ！学生ID是整形！需要注意
 	private static String name;
-	private static int mClass;
+	private static String mClass;
 	private static int week;
 
 	private static int oop;
@@ -61,25 +62,30 @@ public class StudentDA {
 	}
 
 	// 从数据库中检索特定用户的属性值
-	public static Student find(int key) throws NotFoundException {
+	public static Student find(String key) throws NotFoundException {
 		//
 		aStudent = null;
 		// define the SQl query statement using the phone number key
 
-		String sql = "SELECT * FROM student" + " WHERE id = " + key;
+		String sql = "SELECT * FROM student" + " WHERE studentid = " + key;
 		//
 		try {
 			ResultSet rs = aStatement.executeQuery(sql);
 
+			ArrayList<String> projectNameList = GlobalInfo.getProjectList();
 			//
 			boolean gotIt = rs.next();
 			if (gotIt) {
 				//
-				id = rs.getInt("id");
+				studentID = rs.getString("studentid");
 				name = rs.getString("name");
 				week = rs.getInt("week");
-				mClass = rs.getInt("mClass");
-				reaAttendence = rs.getInt("reaAttendence");
+				mClass = rs.getString("mClass");
+				int att[] = new int[projectNameList.size()];
+				for(int i = 0; i < projectNameList.size(); i ++) {
+					att[i] = rs.getInt(projectNameList.size());
+				}
+				//reaAttendence = rs.getInt("reaAttendence");
 
 				// ！数据库中的命名我用的是大写，这个地方可以调
 				oop = rs.getInt("OOP");
@@ -89,6 +95,7 @@ public class StudentDA {
 				physics = rs.getInt("Physics");
 				marx = rs.getInt("Marx");
 
+				aStudent = new Student(studentID, week, name, mClass, attMap);
 				//
 			} else {
 				throw (new NotFoundException("没有找到此学生！"));
@@ -101,28 +108,37 @@ public class StudentDA {
 	}
 
 	public static void add(Student aStudent) throws DuplicateException {
-		id = aStudent.getId();
+		studentID = aStudent.getId();
 		name = aStudent.getName();
 		week = aStudent.getWeek();
 		mClass = aStudent.getmClass();
-		reaAttendence = aStudent.getReaAttendence();
+	//	reaAttendence = aStudent.getReaAttendence();
 
-		oop = aStudent.getOOP();
-		complexFunction = aStudent.getComplexFunction();
-		assemblyLanguage = aStudent.getAssemblyLanguage();
-		chinese = aStudent.getChinese();
-		physics = aStudent.getPhysics();
-		marx = aStudent.getMarx();
+		ArrayList<String> projectNameList = GlobalInfo.getProjectList();
+		Map<String, Integer> attMap = aStudent.getAttMap();
+		int[] att = new int[projectNameList.size()];
+		for(int i = 0; i < projectNameList.size(); i ++) {
+			att[i] = attMap.get(projectNameList.get(i));
+		}
+		
+//		attMap.get()
+//		oop = aStudent.getOOP();
+//		complexFunction = aStudent.getComplexFunction();
+//		assemblyLanguage = aStudent.getAssemblyLanguage();
+//		chinese = aStudent.getChinese();
+//		physics = aStudent.getPhysics();
+//		marx = aStudent.getMarx();
+		
 
-		String sql = "INSERT INTO student(id,name,week,mClass,reaAttendence,oop,"
-				+ "Complex_Function,Assembly_Language,Chinese,Physics,Marx) VALUES ('" + id + "','" + name + "','"
-				+ week + "','" + mClass + "','" + +oop + "','" + "complexFunction" + "','" + assemblyLanguage + "','"
-				+ chinese + "','" + physics + "','" + marx + "')";
+		String sql = "INSERT INTO student (studentid,name,week,mClass,汇编,面向对象,数据结构,电路理论,大学物理,复变函数"
+				+ ") VALUES ('" + studentID + "','" + name + "','"
+				+ week + "','" + mClass + "','" + att[0] + "','" + att[1] + "','" + att[2] + "','"
+				+ att[3] + "','" + att[4] + "','" + att[5] + "')";
 
 		System.out.println(sql);
 
 		try {
-			Student t = find(id);
+			Student t = find(studentID);
 			throw (new DuplicateException("该学生已存在！"));
 		} catch (NotFoundException e) {
 			try {
@@ -140,7 +156,7 @@ public class StudentDA {
 		name = aStudent.getName();
 		week = aStudent.getWeek();
 		mClass = aStudent.getmClass();
-		reaAttendence = aStudent.getReaAttendence();
+		//reaAttendence = aStudent.getReaAttendence();
 
 		oop = aStudent.getOOP();
 		complexFunction = aStudent.getComplexFunction();

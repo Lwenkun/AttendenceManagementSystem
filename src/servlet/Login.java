@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import da.NotFoundException;
+
 import pd.User;
 
 public class Login extends HttpServlet {
@@ -29,7 +31,13 @@ public class Login extends HttpServlet {
 		address = "/jsp/error.jsp";
 	} else {
 		
-		User user = User.find(userName);
+		User user = null;
+		try {
+			user = User.find(userName);
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(user != null) {
 			

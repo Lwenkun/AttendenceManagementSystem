@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td><%=info.getClassName() %></td>
     <%for(int j = 0; j < projects.size(); j++) {%>
     <%String project = projects.get(j); %>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="<%=project + j%>"></input></td>
+    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="<%=project + i%>"></input></td>
     <%} %>
     </tr>
     <%} %>
