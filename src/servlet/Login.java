@@ -37,13 +37,15 @@ public class Login extends HttpServlet {
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("error");
 		}
 		
 		if(user != null) {
 			
-			if(user.getPassword() == password) {
+			if(password.equals(user.getPassword())) {
 				
 				switch (user.getIdentity()) {
+				
 				case User.ADMINISTRATOR :
 					address = "/jsp/administratorchoice.jsp";
 					break;

@@ -5,13 +5,13 @@ import da.NotFoundException;
 import da.UserDA;
 
 public class User {
-	public static final String TEACHER = "ÀÏÊ¦";
-	public static final String ADMINISTRATOR = "¹ÜÀíÔ±";
-	public static final String COUNSELOR = "¸¨µ¼Ô±";
+	public static final String TEACHER = "teacher";
+	public static final String ADMINISTRATOR = "administrator";
+	public static final String COUNSELOR = "counselor";
 	
 	private String userName;
 	private String password;
-	//Éí·İ£¨ÀÏÊ¦£¬¹ÜÀíÔ±£¬¸¨µ¼Ô±£©
+	//èº«ä»½ï¼ˆè€å¸ˆï¼Œç®¡ç†å‘˜ï¼Œè¾…å¯¼å‘˜ï¼‰
 	private String identity;
 	
 	public User(String userName, String password, String identity) {

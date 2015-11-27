@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table border="0" align="center">
 
 <tr>
-<td colspan="2" align="center"><b>请注册</b> <a href="http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/login.jsp" style="text-decoration:none">登陆</a></td>
+<td colspan="2" align="center"><b>请注册</b> <a href="http://desktop-6m41rij:8080/Attendance%20Management%20System/" style="text-decoration:none">登陆</a></td>
 </tr>
 
 <tr>
@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <select name="identity">
 <option value="teacher" >老师</option>
 <option value="counselor" >辅导员</option>
-<option value="administration" >管理员</option>
+<option value="administrator" >管理员</option>
 </select>
 </td>
 </tr>
@@ -56,12 +56,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <td>您教授的科目：</td>
 <td style="font-size:15px">
 <select name="type">
-<option value="0" >数学</option>
-<option value="1" >英语</option>
-<option value="2" >语文</option>
-<option value="3" >物理</option>
-<option value="4" >化学</option>
-<option value="5" >生物</option>
+<option value="huibian" >汇编</option>
+<option value="mianxiangduixiang" >面向对象</option>
+<option value="shujujiegou" >数据结构</option>
+<option value="dianlulilun" >电路理论</option>
+<option value="daxuewuli" >大学物理</option>
+<option value="fubianhanshu" >复变函数</option>
 </select>
 （若您不是老师，可以不填此项）
 </td>

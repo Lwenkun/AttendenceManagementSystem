@@ -39,21 +39,25 @@ public class UserDA {
 	}
 
 	public static User find(String name) throws NotFoundException {
+		
+		aUser = null;
 
-		String sql = "SELECT * FROM user" + "WHERE userName =" + name;
+		String sql = "SELECT username,password,identity FROM user " + "WHERE username = '" + name + "'";
 
 		try {
+			
 			ResultSet rs = aStatement.executeQuery(sql);
-
 			boolean gotIt = rs.next();
+			
+			System.out.println("" + gotIt);
 			if (gotIt) {
-				userName = rs.getString("userName");
+				userName = rs.getString("username");
 				password = rs.getString("password");
 				identity = rs.getString("identity");
 				aUser = new User(userName, password, identity);
 			} else
 				throw (new NotFoundException("没有找到此用户！"));
-			rs.close();
+			 rs.close();
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
@@ -67,17 +71,23 @@ public class UserDA {
 		userName = User.getUserName();
 		password = User.getPassword();
 		
-		String sql = "INSERT INTO user (userName, password, identity) VALUES('" 
+		String sql = "INSERT INTO user (username,password,identity) VALUES('" 
 		+ userName + "','" + password + "','" + identity + "')";
 		
 		System.out.println(sql);
 		
 		try{
-			aUser = find(userName);
+			
+			User c = find(userName);
 			throw (new DuplicateException("该用户已存在！"));
+			
 		} catch (NotFoundException e) {
+			
 			try{
+				
 				int result = aStatement.executeUpdate(sql);
+				
+				
 			} catch (SQLException ee) {
 				System.out.println(ee);
 			}

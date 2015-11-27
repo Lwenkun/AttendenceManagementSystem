@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%String project = projects.get(i); %>
     <th>
    <%=project %>
-    <select name="<%=project %>">
+    <select style="width:120px"  name="<%=project %>">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td><%=info.getClassName() %></td>
     <%for(int j = 0; j < projects.size(); j++) {%>
     <%String project = projects.get(j); %>
-    <td><input type="text" pattern="[0-9]{1}" style="width:80px" name="<%=project + i%>"></input></td>
+    <td><input type="text" pattern="[0-9]{1}" style="width:120px" name="<%=project + i%>"></input></td>
     <%} %>
     </tr>
     <%} %>

@@ -32,26 +32,26 @@ public class TableHandler extends HttpServlet {
 //			projectNames[i] = projectNameList.get(i);
 //		}
 		
-		//Óë¼ÇÂ¼Ñ§ÉúÇé¿öÓÐ¹ØµÄ±äÁ¿
+		//ï¿½ï¿½ï¿½Â¼Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ØµÄ±ï¿½ï¿½ï¿½
 		StudentInfo info;
 		Student student;
 		String name;
 		String studentID;
 		String mClass;
 		
-		//¼ÇÂ¼µ±Ç°ÖÜ´Î
+		//ï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½Ü´ï¿½
 		int week = Integer.parseInt(req.getParameter("week"));
 		for(int i = 0; i < infoList.size(); i ++) {
 			
-			//»ñÈ¡Ò»ÌõÑ§ÉúÐÅÏ¢
+			//ï¿½ï¿½È¡Ò»ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½Ï¢
 			info = infoList.get(i);
 			
-			//»ñÈ¡ÐÅÏ¢ÏêÇé
+			//ï¿½ï¿½È¡ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 			name = info.getName();
 		    studentID = info.getStudentID();
 		    mClass = info.getClassName();
 		    
-		    //¼ÇÂ¼Ã¿¸öÑ§ÉúµÄÃ¿ÃÅ¹¦¿ÎµÄµ½¿ÎÇé¿ö
+		    //ï¿½ï¿½Â¼Ã¿ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½Ã¿ï¿½Å¹ï¿½ï¿½ÎµÄµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		    HashMap<String, Integer> attMap = new HashMap<>();
 		    for(int j = 0; j < projectNameList.size(); j++) {
 		    	attMap.put(projectNameList.get(j), Integer.parseInt(req.getParameter(projectNameList.get(j) + i)));
@@ -59,9 +59,10 @@ public class TableHandler extends HttpServlet {
 		    	System.out.println(req.getParameter(projectNameList.get(j) + i));
 		    }
 		    
-		    //½«½á¹û±£´æµ½Êý¾Ý¿â
+		    //ï¿½ï¿½ï¿½ï¿½ï¿½æµ½ï¿½ï¿½Ý¿ï¿½
 		    try {
 				student = new Student(studentID, week, name, mClass, attMap);
+				Student.initialize();
 				student.add();
 			} catch (DuplicateException e) {
 				// TODO Auto-generated catch block
@@ -75,11 +76,12 @@ public class TableHandler extends HttpServlet {
 			
 		}
 		
-		//¼ÇÂ¼Ã¿ÃÅ¹¦¿Îµ±ÖÜµÄÊµ¼Ê½ÚÊý
+		//ï¿½ï¿½Â¼Ã¿ï¿½Å¹ï¿½ï¿½Îµï¿½ï¿½Üµï¿½Êµï¿½Ê½ï¿½ï¿½ï¿½
 	    for(int j = 0; j < projectNameList.size(); j++ ) {
 	    	
 				Project project  = new Project(projectNameList.get(j), week, Integer.parseInt(req.getParameter(projectNameList.get(j))));
 				try {
+					Project.initialize();
 					project.add();
 				} catch (DuplicateException e) {
 					// TODO Auto-generated catch block

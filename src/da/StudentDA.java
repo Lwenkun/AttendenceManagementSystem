@@ -4,6 +4,7 @@ import java.net.PasswordAuthentication;
 import java.security.interfaces.RSAKey;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import pd.Student;
@@ -67,33 +68,30 @@ public class StudentDA {
 		aStudent = null;
 		// define the SQl query statement using the phone number key
 
-		String sql = "SELECT * FROM student" + " WHERE studentid = " + key;
+		String sql = "SELECT * FROM student" + " WHERE studentid = '" + key + "'";
 		//
 		try {
 			ResultSet rs = aStatement.executeQuery(sql);
 
-			ArrayList<String> projectNameList = GlobalInfo.getProjectList();
+			
 			//
 			boolean gotIt = rs.next();
 			if (gotIt) {
 				//
+				ArrayList<String> projectNameList = GlobalInfo.getProjectList();
 				studentID = rs.getString("studentid");
 				name = rs.getString("name");
 				week = rs.getInt("week");
 				mClass = rs.getString("mClass");
 				int att[] = new int[projectNameList.size()];
+				Map<String, Integer> attMap = new HashMap<>();
 				for(int i = 0; i < projectNameList.size(); i ++) {
-					att[i] = rs.getInt(projectNameList.size());
+					att[i] = rs.getInt(projectNameList.get(i));
+					attMap.put(projectNameList.get(i), att[i]);
 				}
 				//reaAttendence = rs.getInt("reaAttendence");
 
 				// ！数据库中的命名我用的是大写，这个地方可以调
-				oop = rs.getInt("OOP");
-				complexFunction = rs.getInt("Complex_Function");
-				assemblyLanguage = rs.getInt("Assembly_Language");
-				chinese = rs.getInt("Chinese");
-				physics = rs.getInt("Physics");
-				marx = rs.getInt("Marx");
 
 				aStudent = new Student(studentID, week, name, mClass, attMap);
 				//
@@ -108,6 +106,7 @@ public class StudentDA {
 	}
 
 	public static void add(Student aStudent) throws DuplicateException {
+		
 		studentID = aStudent.getId();
 		name = aStudent.getName();
 		week = aStudent.getWeek();
@@ -121,15 +120,6 @@ public class StudentDA {
 			att[i] = attMap.get(projectNameList.get(i));
 		}
 		
-//		attMap.get()
-//		oop = aStudent.getOOP();
-//		complexFunction = aStudent.getComplexFunction();
-//		assemblyLanguage = aStudent.getAssemblyLanguage();
-//		chinese = aStudent.getChinese();
-//		physics = aStudent.getPhysics();
-//		marx = aStudent.getMarx();
-		
-
 		String sql = "INSERT INTO student (studentid,name,week,mClass,汇编,面向对象,数据结构,电路理论,大学物理,复变函数"
 				+ ") VALUES ('" + studentID + "','" + name + "','"
 				+ week + "','" + mClass + "','" + att[0] + "','" + att[1] + "','" + att[2] + "','"
@@ -152,23 +142,16 @@ public class StudentDA {
 	// ！！Update参照书上代码所写，这里面的get方法有直接获取课程的，和你的动态数组会有出入
 	// ！！这个地方不知道怎么 处理，暂且先这样写吧
 	public static void update(Student aStudent) throws NotFoundException {
-		id = aStudent.getId();
+		
+		studentID = aStudent.getId();
 		name = aStudent.getName();
 		week = aStudent.getWeek();
 		mClass = aStudent.getmClass();
-		//reaAttendence = aStudent.getReaAttendence();
-
-		oop = aStudent.getOOP();
-		complexFunction = aStudent.getComplexFunction();
-		assemblyLanguage = aStudent.getAssemblyLanguage();
-		chinese = aStudent.getChinese();
-		physics = aStudent.getPhysics();
-		marx = aStudent.getMarx();
 
 		String sql = "UPDATE student SET name = '" + name + "'," + "mClass = " + mClass + "," + "week = " + week + ","
 				+ "reaAttendence = " + reaAttendence + "," + "OOP = " + oop + "," + "Complex_Function = "
 				+ complexFunction + "," + "Assembly_Language = " + assemblyLanguage + "," + "Chinese = " + chinese + ","
-				+ "Physics = " + physics + "," + "Marx = " + marx + "WHERE id = " + id;
+				+ "Physics = " + physics + "," + "Marx = " + marx + "WHERE id = " + studentID;
 
 		try {
 			int result = aStatement.executeUpdate(sql);
