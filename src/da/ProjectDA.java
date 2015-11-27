@@ -7,7 +7,7 @@ import pd.Project;
 public class ProjectDA {
 	private static Project aProject;
 	//
-	private static String url = "jdbc:mysql://localhost:3306/attendenceSystem";
+	private static String url = "jdbc:mysql://localhost:3306/mydatabase";
 	private static Connection aConnection;
 	private static Statement aStatement;
 	
@@ -19,7 +19,7 @@ public class ProjectDA {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
-			aConnection = DriverManager.getConnection(url, "root", "");
+			aConnection = DriverManager.getConnection(url, "root", "19960326");
 			aStatement = aConnection.createStatement();
 		} catch (ClassNotFoundException e) {
 			System.out.println(e);
@@ -38,12 +38,12 @@ public class ProjectDA {
 		}
 	}
 	
-	public static Project find(String key) throws NotFoundException {
+	public static Project find(String projectName, int week) throws NotFoundException {
 		//
 		aProject = null;
 		// define the SQl query statement using the phone number key
 
-		String sql = "SELECT * FROM project" + " WHERE name = " + key;
+		String sql = "SELECT * FROM projects WHERE name = '" + projectName + "' AND week = '" + week + "'"  ;
 		//
 		try {
 			ResultSet rs = aStatement.executeQuery(sql);
@@ -69,19 +69,21 @@ public class ProjectDA {
 	}
 	
 	public static void add(Project project) throws DuplicateException{
+		aProject = null;
 		
+		name = project.getName();
 		week = project.getWeek();
 		num = project.getNum();
-		name = project.getName();
 		
-		String sql = "INSERT INTO project (week,num,name) VALUES ("
-		+ week + "','" + num + "','" + name + "')";
+		String sql = "INSERT INTO projects (name,week,num) VALUES ('"
+		+ name + "','" + week + "','" +  num + "')";
 		
 		System.out.println(sql);
 		
 		try{
 			
-			aProject = find(name);
+			aProject = find(name, week);
+			System.out.println("本课程该周次的数据已经录入，请不要重复录入");
 			
 		}catch(NotFoundException e){ 
 			
@@ -103,8 +105,8 @@ public class ProjectDA {
 		week = project.getWeek();
 		num = project.getNum();
 
-		String sql = "UPDATE Subject SET name = '" + name + "'," 
-		+ "week = " + week + "," 
+		String sql = "UPDATE projects SET name = '" + name + "'," 
+		+ "week = '" + week + "'," 
 				+ "num = '" + num + "'" +
 		"WHERE name = '" + name + "'";
 

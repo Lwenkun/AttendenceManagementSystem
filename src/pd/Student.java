@@ -70,8 +70,8 @@ public void add() throws DuplicateException {
 	StudentDA.add(this);
 }
 
-public static Student find(String name) throws NotFoundException {
-	return StudentDA.find(name);
+public static Student find(String name, int week) throws NotFoundException {
+	return StudentDA.find(name, week);
 }
 
 public void update() throws NotFoundException {

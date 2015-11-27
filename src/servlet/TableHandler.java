@@ -25,13 +25,6 @@ public class TableHandler extends HttpServlet {
 		ArrayList<GlobalInfo.StudentInfo> infoList = GlobalInfo.getStudentInfoList();
 		ArrayList<String> projectNameList = GlobalInfo.getProjectList();
 		
-//		int projectNum = projectNameList.size();
-//		String[] projectNames = new String[projectNum];
-//		
-//		for(int i = 0; i < projectNameList.size(); i++) {
-//			projectNames[i] = projectNameList.get(i);
-//		}
-		
 		//���¼ѧ������йصı���
 		StudentInfo info;
 		Student student;
@@ -54,7 +47,9 @@ public class TableHandler extends HttpServlet {
 		    //��¼ÿ��ѧ���ÿ�Ź��εĵ������
 		    HashMap<String, Integer> attMap = new HashMap<>();
 		    for(int j = 0; j < projectNameList.size(); j++) {
+		    	
 		    	attMap.put(projectNameList.get(j), Integer.parseInt(req.getParameter(projectNameList.get(j) + i)));
+		    	
 		    	System.out.println(projectNameList.get(j));
 		    	System.out.println(req.getParameter(projectNameList.get(j) + i));
 		    }
@@ -67,21 +62,17 @@ public class TableHandler extends HttpServlet {
 			} catch (DuplicateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} finally {
-				System.out.println(studentID);
-				System.out.println("" + week);
-				System.out.println(name);
-				System.out.println(mClass);
 			}
 			
 		}
 		
 		//��¼ÿ�Ź��ε��ܵ�ʵ�ʽ���
+		Project.initialize();
 	    for(int j = 0; j < projectNameList.size(); j++ ) {
 	    	
 				Project project  = new Project(projectNameList.get(j), week, Integer.parseInt(req.getParameter(projectNameList.get(j))));
 				try {
-					Project.initialize();
+					
 					project.add();
 				} catch (DuplicateException e) {
 					// TODO Auto-generated catch block

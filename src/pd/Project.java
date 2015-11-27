@@ -39,8 +39,8 @@ public class Project {
 		ProjectDA.terminate();
 	}
 	
-	public static Project find(String name) throws NotFoundException{
-		return ProjectDA.find(name);
+	public static Project find(String name, int week) throws NotFoundException{
+		return ProjectDA.find(name, week);
 	}
 	
 	public String getName() {

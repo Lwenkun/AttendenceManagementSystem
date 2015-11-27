@@ -56,12 +56,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <td>您教授的科目：</td>
 <td style="font-size:15px">
 <select name="type">
-<option value="huibian" >汇编</option>
-<option value="mianxiangduixiang" >面向对象</option>
-<option value="shujujiegou" >数据结构</option>
-<option value="dianlulilun" >电路理论</option>
-<option value="daxuewuli" >大学物理</option>
-<option value="fubianhanshu" >复变函数</option>
+<option value="Assembly" >汇编</option>
+<option value="Oop" >面向对象</option>
+<option value="Data_Structure" >数据结构</option>
+<option value="Circuit_Theory" >电路理论</option>
+<option value="Physics">大学物理</option>
+<option value="Complex_Function" >复变函数</option>
 </select>
 （若您不是老师，可以不填此项）
 </td>

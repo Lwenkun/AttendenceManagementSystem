@@ -33,6 +33,7 @@ public class Login extends HttpServlet {
 		
 		User user = null;
 		try {
+			User.initialize();
 			user = User.find(userName);
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
@@ -52,7 +53,7 @@ public class Login extends HttpServlet {
 				case User.COUNSELOR :
 					address = "/jsp/counselor.jsp";
 					break;
-				case User.TEACHER :
+				default :
 					address = "/jsp/teacher.jsp";
 					break;
 				}

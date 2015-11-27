@@ -1,7 +1,6 @@
 package da;
 
-import java.net.PasswordAuthentication;
-import java.security.interfaces.RSAKey;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,38 +10,23 @@ import pd.Student;
 
 public class StudentDA {
 	private static Student aStudent;
-	//
-	private static String url = "jdbc:mysql://localhost:3306/attendenceSystem";// !
+	
+	private static String url = "jdbc:mysql://localhost:3306/mydatabase";// !
 	private static Connection aConnection;
 	private static Statement aStatement;
-	//
-	private static String studentID; // ！学生ID是整形！需要注意
+	
+	private static String studentID; 
 	private static String name;
 	private static String mClass;
 	private static int week;
 
-	private static int oop;
-	private static int complexFunction;
-	private static int assemblyLanguage;
-	private static int chinese; // ！后三门为新加入课程
-	private static int physics;
-	private static int marx;
-
-	// ！注意我这个地方的变量，是实际到课人数，不是到课率
-	// 后面两行注释是备用
-	private static int reaAttendence;
-
-	// private static double attendenceRate;
-	// private static ArrayList<String> subjectName = new ArrayList<String>();
-
-	public static Connection initialize() {// 用于建立与存储数据的文件的连接
+	public static Connection initialize() {
 		try {
-			// loading jdbc - odbc bridge driver
+			
 			Class.forName("com.mysql.jdbc.Driver");
 
-			// 创建一个到给定数据库URL的连接和Statement的实例
-			aConnection = DriverManager.getConnection(url, "root", "");
-			// 创建Statement实例
+			aConnection = DriverManager.getConnection(url, "root", "19960326");
+			
 			aStatement = aConnection.createStatement();
 		} catch (ClassNotFoundException e) {
 			System.out.println(e);
@@ -63,18 +47,19 @@ public class StudentDA {
 	}
 
 	// 从数据库中检索特定用户的属性值
-	public static Student find(String key) throws NotFoundException {
+	public static Student find(String key, int week) throws NotFoundException {
 		//
 		aStudent = null;
 		// define the SQl query statement using the phone number key
 
-		String sql = "SELECT * FROM student" + " WHERE studentid = '" + key + "'";
+		String sql = "SELECT * FROM student" + " WHERE studentid = '" + key + "' AND week ='" + week + "'";
+		
+		System.out.println(sql);
 		//
 		try {
+			
 			ResultSet rs = aStatement.executeQuery(sql);
 
-			
-			//
 			boolean gotIt = rs.next();
 			if (gotIt) {
 				//
@@ -82,10 +67,12 @@ public class StudentDA {
 				studentID = rs.getString("studentid");
 				name = rs.getString("name");
 				week = rs.getInt("week");
-				mClass = rs.getString("mClass");
+				mClass = rs.getString("class");
 				int att[] = new int[projectNameList.size()];
 				Map<String, Integer> attMap = new HashMap<>();
 				for(int i = 0; i < projectNameList.size(); i ++) {
+					System.out.println("wwwwww");
+					System.out.println(projectNameList.get(i));
 					att[i] = rs.getInt(projectNameList.get(i));
 					attMap.put(projectNameList.get(i), att[i]);
 				}
@@ -100,7 +87,7 @@ public class StudentDA {
 			}
 			rs.close();
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return aStudent;
 	}
@@ -120,7 +107,7 @@ public class StudentDA {
 			att[i] = attMap.get(projectNameList.get(i));
 		}
 		
-		String sql = "INSERT INTO student (studentid,name,week,mClass,汇编,面向对象,数据结构,电路理论,大学物理,复变函数"
+		String sql = "INSERT INTO student (studentid,name,week,class,Assembly,Oop,Data_Structure,Circuit_Theory,Physics,Complex_Function"
 				+ ") VALUES ('" + studentID + "','" + name + "','"
 				+ week + "','" + mClass + "','" + att[0] + "','" + att[1] + "','" + att[2] + "','"
 				+ att[3] + "','" + att[4] + "','" + att[5] + "')";
@@ -128,8 +115,8 @@ public class StudentDA {
 		System.out.println(sql);
 
 		try {
-			Student t = find(studentID);
-			throw (new DuplicateException("该学生已存在！"));
+			Student t = find(studentID, week);
+			throw (new DuplicateException("该学生本周次的出勤率已经录入，请不要重复录入！"));
 		} catch (NotFoundException e) {
 			try {
 				int result = aStatement.executeUpdate(sql);
@@ -144,14 +131,18 @@ public class StudentDA {
 	public static void update(Student aStudent) throws NotFoundException {
 		
 		studentID = aStudent.getId();
-		name = aStudent.getName();
-		week = aStudent.getWeek();
-		mClass = aStudent.getmClass();
-
-		String sql = "UPDATE student SET name = '" + name + "'," + "mClass = " + mClass + "," + "week = " + week + ","
-				+ "reaAttendence = " + reaAttendence + "," + "OOP = " + oop + "," + "Complex_Function = "
-				+ complexFunction + "," + "Assembly_Language = " + assemblyLanguage + "," + "Chinese = " + chinese + ","
-				+ "Physics = " + physics + "," + "Marx = " + marx + "WHERE id = " + studentID;
+		
+		ArrayList<String> projectNameList = GlobalInfo.getProjectList();
+		Map<String, Integer> attMap = new HashMap<>();
+		int[] att = new int[projectNameList.size()];
+		for(int i = 0; i < projectNameList.size(); i ++) {
+			att[i] = attMap.get(projectNameList.get(i));
+		}
+	//	Assembly,Oop,Data_Structure,Circuit _Theory,Physics,Complex_Function
+		String sql = "UPDATE student SET "
+				+ "Assembly = '" + att[0] + "'," + "Oop = '"
+				+ att[1] + "'," + "Data_Structure = '" + att[2] + "'," + "Circuit_Theory = '" + att[3] + "',"
+				+ "Physics = '" + att[4] + "'," + "Complex_Function = '" + att[5] + "' WHERE id = '" + studentID + "'";
 
 		try {
 			int result = aStatement.executeUpdate(sql);
