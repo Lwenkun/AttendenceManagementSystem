@@ -10,6 +10,7 @@ import da.StudentDA;
 
 
 public class Student {
+	
 private String id;//学号
 private int week;//周次
 private String name;//姓名
@@ -75,7 +76,7 @@ public static Student find(String name, int week) throws NotFoundException {
 }
 
 public void update() throws NotFoundException {
-	StudentDA.update(this);
+	StudentDA.update(this, week);
 }
 
 public static void initialize() {

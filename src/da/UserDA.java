@@ -87,7 +87,6 @@ public class UserDA {
 				
 				int result = aStatement.executeUpdate(sql);
 				
-				
 			} catch (SQLException ee) {
 				System.out.println(ee);
 			}

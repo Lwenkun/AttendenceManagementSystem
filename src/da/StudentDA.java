@@ -71,12 +71,10 @@ public class StudentDA {
 				int att[] = new int[projectNameList.size()];
 				Map<String, Integer> attMap = new HashMap<>();
 				for(int i = 0; i < projectNameList.size(); i ++) {
-					System.out.println("wwwwww");
-					System.out.println(projectNameList.get(i));
+					
 					att[i] = rs.getInt(projectNameList.get(i));
 					attMap.put(projectNameList.get(i), att[i]);
 				}
-				//reaAttendence = rs.getInt("reaAttendence");
 
 				// ！数据库中的命名我用的是大写，这个地方可以调
 
@@ -128,7 +126,7 @@ public class StudentDA {
 
 	// ！！Update参照书上代码所写，这里面的get方法有直接获取课程的，和你的动态数组会有出入
 	// ！！这个地方不知道怎么 处理，暂且先这样写吧
-	public static void update(Student aStudent) throws NotFoundException {
+	public static void update(Student aStudent,int week) throws NotFoundException {
 		
 		studentID = aStudent.getId();
 		
@@ -142,7 +140,7 @@ public class StudentDA {
 		String sql = "UPDATE student SET "
 				+ "Assembly = '" + att[0] + "'," + "Oop = '"
 				+ att[1] + "'," + "Data_Structure = '" + att[2] + "'," + "Circuit_Theory = '" + att[3] + "',"
-				+ "Physics = '" + att[4] + "'," + "Complex_Function = '" + att[5] + "' WHERE id = '" + studentID + "'";
+				+ "Physics = '" + att[4] + "'," + "Complex_Function = '" + att[5] + "' WHERE studentid = '" + studentID + "' AND week = '" + week + "'";
 
 		try {
 			int result = aStatement.executeUpdate(sql);

@@ -28,7 +28,7 @@ public class SignUp extends HttpServlet {
 		identity = req.getParameter("identity");
 		
 		if("teacher".equals(identity)) {
-			identity = req.getParameter("type") + "teacher";
+			identity = req.getParameter("type");
 		}
 		
 		PrintWriter output = resp.getWriter();

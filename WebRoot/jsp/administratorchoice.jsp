@@ -13,7 +13,7 @@ input{align:center;}
 <h2 align="center">管理员中心</h2>
 <center>
 <input type="button" name="Input" value="录入" onclick="window.location.href='http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/attendencerecord.jsp'"/>
-<input type="button" name="Update" value="查询" onclick="window.location.href='http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/login.jsp'"/>
+<input type="button" name="Update" value="修改" onclick="window.location.href='http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/adminupdate.jsp'"/>
 </center>
 
 
