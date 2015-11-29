@@ -11,7 +11,7 @@ import pd.Student;
 public class StudentDA {
 	private static Student aStudent;
 	
-	private static String url = "jdbc:mysql://localhost:3306/mydatabase";// !
+	private static String url = "jdbc:mysql://localhost:3306/mydatabase";
 	private static Connection aConnection;
 	private static Statement aStatement;
 	
@@ -36,7 +36,6 @@ public class StudentDA {
 		return aConnection;
 	}
 
-	// 释放所用系统资源
 	public static void terminate() {
 		try {
 			aStatement.close();
@@ -46,23 +45,28 @@ public class StudentDA {
 		}
 	}
 
-	// 从数据库中检索特定用户的属性值
-	public static Student find(String key, int week) throws NotFoundException {
-		//
+    /**
+     * 
+     * @param key 学生ID
+     * @param week 周次
+     * @return 该周次该学生的一条记录
+     * @throws NotFoundException
+     */
+	public static Student find(String key,int week) throws NotFoundException {
+		
 		aStudent = null;
-		// define the SQl query statement using the phone number key
 
 		String sql = "SELECT * FROM student" + " WHERE studentid = '" + key + "' AND week ='" + week + "'";
 		
 		System.out.println(sql);
-		//
+		
 		try {
 			
 			ResultSet rs = aStatement.executeQuery(sql);
 
 			boolean gotIt = rs.next();
 			if (gotIt) {
-				//
+				
 				ArrayList<String> projectNameList = GlobalInfo.getProjectList();
 				studentID = rs.getString("studentid");
 				name = rs.getString("name");
@@ -76,10 +80,8 @@ public class StudentDA {
 					attMap.put(projectNameList.get(i), att[i]);
 				}
 
-				// ！数据库中的命名我用的是大写，这个地方可以调
-
 				aStudent = new Student(studentID, week, name, mClass, attMap);
-				//
+				
 			} else {
 				throw (new NotFoundException("没有找到此学生！"));
 			}
@@ -90,13 +92,17 @@ public class StudentDA {
 		return aStudent;
 	}
 
+	/**
+	 * 
+	 * @param aStudent
+	 * @throws DuplicateException
+	 */
 	public static void add(Student aStudent) throws DuplicateException {
 		
 		studentID = aStudent.getId();
 		name = aStudent.getName();
 		week = aStudent.getWeek();
 		mClass = aStudent.getmClass();
-	//	reaAttendence = aStudent.getReaAttendence();
 
 		ArrayList<String> projectNameList = GlobalInfo.getProjectList();
 		Map<String, Integer> attMap = aStudent.getAttMap();
@@ -124,14 +130,18 @@ public class StudentDA {
 		}
 	}
 
-	// ！！Update参照书上代码所写，这里面的get方法有直接获取课程的，和你的动态数组会有出入
-	// ！！这个地方不知道怎么 处理，暂且先这样写吧
-	public static void update(Student aStudent,int week) throws NotFoundException {
+	/**
+	 * 
+	 * @param aStudent
+	 * @param week
+	 * @throws NotFoundException
+	 */
+	public static void update(Student aStudent, int week) throws NotFoundException {
 		
 		studentID = aStudent.getId();
 		
 		ArrayList<String> projectNameList = GlobalInfo.getProjectList();
-		Map<String, Integer> attMap = new HashMap<>();
+		Map<String, Integer> attMap = aStudent.getAttMap();
 		int[] att = new int[projectNameList.size()];
 		for(int i = 0; i < projectNameList.size(); i ++) {
 			att[i] = attMap.get(projectNameList.get(i));
@@ -142,6 +152,7 @@ public class StudentDA {
 				+ att[1] + "'," + "Data_Structure = '" + att[2] + "'," + "Circuit_Theory = '" + att[3] + "',"
 				+ "Physics = '" + att[4] + "'," + "Complex_Function = '" + att[5] + "' WHERE studentid = '" + studentID + "' AND week = '" + week + "'";
 
+		System.out.println(sql);
 		try {
 			int result = aStatement.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -149,5 +160,40 @@ public class StudentDA {
 		}
 
 	}
+	
+   /**
+    * 用于计算某门课的到课率
+    * @param key 科目类型
+    * @param week 周次
+    * @return 一个该周所有学生该科目的实到课率数组
+    * @throws NotFoundException
+    */
+	public static ArrayList<Integer> findForCalProjRate(String key, int week) throws NotFoundException {
+		
+		aStudent = null;
+		
+		ArrayList<Integer> rates = new ArrayList<>();
+		
+		String sql = "SELECT " + key + " FROM student WHERE week = '" + week + "'";
+		
+		System.out.println(sql);
+		
+		try {
+			
+			ResultSet rs = aStatement.executeQuery(sql);
+			
+			while(rs.next()) {
+				rates.add(rs.getInt(key));
+			}  
+			if (rates.size() == 0){
+				throw (new NotFoundException("没有该科目该周次的信息"));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rates;
+	}
+
 
 }

@@ -87,4 +87,8 @@ public static void terminate() {
 	StudentDA.terminate();
 }
 
+public static ArrayList<Integer> findForCalProjRate(String projectName, int week) throws NotFoundException {
+	return StudentDA.findForCalProjRate(projectName, week);
+}
+
 }

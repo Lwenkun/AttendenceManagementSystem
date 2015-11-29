@@ -1,12 +1,13 @@
 package da;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import pd.Project;
 
 public class ProjectDA {
 	private static Project aProject;
-	//
+	
 	private static String url = "jdbc:mysql://localhost:3306/mydatabase";
 	private static Connection aConnection;
 	private static Statement aStatement;
@@ -39,24 +40,21 @@ public class ProjectDA {
 	}
 	
 	public static Project find(String projectName, int week) throws NotFoundException {
-		//
+	
 		aProject = null;
-		// define the SQl query statement using the phone number key
 
 		String sql = "SELECT * FROM projects WHERE name = '" + projectName + "' AND week = '" + week + "'"  ;
-		//
+		
 		try {
 			ResultSet rs = aStatement.executeQuery(sql);
 
-			//
 			boolean gotIt = rs.next();
 			if (gotIt) {
-				//
+				
 				name = rs.getString("name");
 				week = rs.getInt("week");
 				num = rs.getInt("num");
 				
-				//
 				aProject = new Project(name, week, num);
 			} else {
 				throw (new NotFoundException("没有找到此课程！"));
@@ -66,6 +64,31 @@ public class ProjectDA {
 			System.out.println(e);
 		}
 		return aProject;
+	}
+	
+	public static ArrayList<Integer> findForWeek(String projectName) throws NotFoundException {
+
+	      String sql = "SELECT week FROM projects WHERE name = '" + projectName + "'" ;
+	      
+	      ArrayList<Integer> weeks = new ArrayList<Integer>();
+		
+		try {
+			ResultSet rs = aStatement.executeQuery(sql);
+			
+			while(rs.next()) {
+			
+				week = rs.getInt("week");
+			
+				weeks.add(week);
+			} 
+			if(weeks.size() == 0) {
+				throw (new NotFoundException("没有该课程的信息！"));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return weeks;
 	}
 	
 	public static void add(Project project) throws DuplicateException{

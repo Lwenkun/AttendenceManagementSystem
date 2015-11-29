@@ -31,6 +31,18 @@
   </servlet-mapping>
   
   <servlet>
+  <description>更新处理</description>
+  <display-name>UpdateHandler</display-name>
+  <servlet-name>UpdateHandler</servlet-name>
+  <servlet-class>servlet.UpdateHandler</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>UpdateHandler</servlet-name>
+  <url-pattern>/UpdateHandler</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   <description>表格处理</description>
   <display-name>TableHandler</display-name>
   <servlet-name>TableHandler</servlet-name>
@@ -42,17 +54,7 @@
   <url-pattern>/TableHandler</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-  <description>更新处理</description>
-  <display-name>UpdateHandler</display-name>
-  <servlet-name>UpdateHandler</servlet-name>
-  <servlet-class>servlet.UpdateHandler</servlet-class>
-  </servlet>
   
-  <servlet-mapping>
-  <servlet-name>UpdateHandler</servlet-name>
-  <url-pattern>/UpdateHandler</url-pattern>
-  </servlet-mapping>
   
   <welcome-file-list>
     <welcome-file>/jsp/login.jsp</welcome-file>

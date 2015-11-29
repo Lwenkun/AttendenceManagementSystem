@@ -1,5 +1,7 @@
 package pd;
 
+import java.util.ArrayList;
+
 import da.DuplicateException;
 import da.NotFoundException;
 import da.ProjectDA;
@@ -41,6 +43,10 @@ public class Project {
 	
 	public static Project find(String name, int week) throws NotFoundException{
 		return ProjectDA.find(name, week);
+	}
+	
+	public static ArrayList<Integer> findForWeek(String name) throws NotFoundException {
+		return ProjectDA.findForWeek(name);
 	}
 	
 	public String getName() {

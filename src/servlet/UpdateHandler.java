@@ -36,6 +36,7 @@ public class UpdateHandler extends HttpServlet {
 			
 			Student student = new Student(studentID, week, null, null, attMap);
 			
+			Student.initialize();
 			student.update();
 			
 			output.println("<script type='text/javascript'>" +

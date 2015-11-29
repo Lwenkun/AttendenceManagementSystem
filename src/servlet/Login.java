@@ -61,10 +61,10 @@ public class Login extends HttpServlet {
 					address = "/jsp/counselor.jsp";
 					break;
 				default :
-					//address = "/jsp/teacher.jsp";
+					
 					PrintWriter out = res.getWriter();
 					printTable(out, user.getIdentity());
-//					req.setAttribute("type", new TeacherType(user.getIdentity()));
+
 					break;
 				}
 				
@@ -76,21 +76,12 @@ public class Login extends HttpServlet {
 			address = "/jsp/error.jsp";
 		}
 	}
-	
-	RequestDispatcher dispatcher = req.getRequestDispatcher(address);
-	
-	dispatcher.forward(req, res);
+	if(address != null) {
+		RequestDispatcher dispatcher = req.getRequestDispatcher(address);
+		
+		dispatcher.forward(req, res);
 	}
-	
-//	public String findTeacherType(User user) {
-//		String identity = user.getIdentity();
-//		ArrayList<String> projectNameList = GlobalInfo.getProjectList();
-//		String type;
-//		for(int i = 0;i < projectNameList.size(); i++) {
-//			if("identity".equals(projectNameList.get(i)))
-//				
-//		}
-//	}
+}
 	
 	public void printTable(PrintWriter out, String type) {
 		
@@ -98,15 +89,16 @@ public class Login extends HttpServlet {
 		out.println("<html>" +
 				"<head>" +
 				"</head>" +
-				"<body>" +
-				 "<p>" +
-				 "您所教的科目各周到课率的情况为" +
-				 "</p>" +
-				"<table>");
+				"<body><center>" +
+				 "<p><b>" +
+				 "The AttendenceRates of the project you teach:" +
+				 "</b></p>" +
+				"<table border='1'>");
 		
 		ArrayList<Integer> weeks = null;
 		
 		try {
+			Project.initialize();
 			weeks = Project.findForWeek(type);
 		} catch (NotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -119,7 +111,7 @@ public class Login extends HttpServlet {
 		 float rate[] = new float[weekNum];
 		
 		try {
-			Project.initialize();
+			Student.initialize();
 			
 			int should[] = new int[weekNum];
 			
@@ -146,9 +138,9 @@ public class Login extends HttpServlet {
 		
 		for(int i = 0; i < weekNum; i++) {
 			out.println("<tr>" +
-					"<td>" +
-					"第" + weeks.get(i) + "周：" +
-					"</td>"  + 
+					"<th>" +
+					"week" + weeks.get(i) + ":" +
+					"</th>"  + 
 					"<td>" +
 					rate[i] +
 					"</td>" +
@@ -156,7 +148,7 @@ public class Login extends HttpServlet {
 		}
 		
 		out.println("</table>" +
-				"</body>" +
+				"</center></body>" +
 				"</html>");
 	}
 }

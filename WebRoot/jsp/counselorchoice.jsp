@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'teacher.jsp' starting page</title>
+    <title>My JSP 'counselor.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -21,18 +21,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-  <%@page import="da.*" %>
-  <%@page import="pd.*" %>
-  <jsp:useBean id="type" type="pd.TeacherType" scope="request" />
-  <input id="type" type="hidden" value="<jsp:getProperty name="type" property="type"/>" name="type"/>
-  <script type="text/javascript">
-  	var er = document.getElementById("type").value;
-  	
-  </script>
-  <%String type = %>
+  
   <body>
-  <h2>您所教课程的到课情况为：</h2>
-  <% %>
-    <%= %>
+  <center>
+  <p>
+  请选择您想要查询的结果：：
+  </p>
+ <input type="button" name="Input" value="查询个人" onclick="window.location.href='http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/attendencerecord.jsp'"/>
+<input type="button" name="Update" value="查询全班" onclick="window.location.href='http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/adminupdate.jsp'"/>
+
+  </center>
   </body>
 </html>
