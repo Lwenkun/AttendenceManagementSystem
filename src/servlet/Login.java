@@ -16,7 +16,6 @@ import da.NotFoundException;
 
 import pd.Project;
 import pd.Student;
-import pd.TeacherType;
 import pd.User;
 
 public class Login extends HttpServlet {
@@ -58,7 +57,7 @@ public class Login extends HttpServlet {
 					address = "/jsp/administratorchoice.jsp";
 					break;
 				case User.COUNSELOR :
-					address = "/jsp/counselor.jsp";
+					address = "/jsp/individual.jsp";
 					break;
 				default :
 					
@@ -130,7 +129,7 @@ public class Login extends HttpServlet {
 		        for(int j = 0; j < rates.size(); j ++) {
 		        	sum += rates.get(i);
 		        }
-		        rate[i] = sum / (float) should[i];
+		        rate[i] = (float) sum / (float) should[i];
 		    }
 		} catch(Exception e) {
 			e.printStackTrace();

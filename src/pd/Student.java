@@ -87,8 +87,14 @@ public static void terminate() {
 	StudentDA.terminate();
 }
 
+//根据课程名和周次获取本周该课程所有学生的到课情况
 public static ArrayList<Integer> findForCalProjRate(String projectName, int week) throws NotFoundException {
 	return StudentDA.findForCalProjRate(projectName, week);
 }
 
+//获取某位学生的所有周次的记录
+public static ArrayList<Student> findStudents(String studentID) {
+	
+	return StudentDA.findStudents(studentID);
+}
 }

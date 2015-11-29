@@ -42,6 +42,18 @@
   <url-pattern>/UpdateHandler</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+  <description>处理辅导员查询</description>
+  <display-name>CounselorChoiceHandler</display-name>
+  <servlet-name>CounselorChoiceHandler</servlet-name>
+  <servlet-class>servlet.CounselorChoiceHandler</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>CounselorChoiceHandler</servlet-name>
+  <url-pattern>/CounselorChoiceHandler</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   <description>表格处理</description>
   <display-name>TableHandler</display-name>

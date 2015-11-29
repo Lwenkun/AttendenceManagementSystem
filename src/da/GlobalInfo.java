@@ -3,7 +3,11 @@ package da;
 import java.sql.*;
 import java.util.*;
 
-
+/**
+ * 全局信息
+ * @author 15119
+ *
+ */
 public class GlobalInfo {
 	
 	private static final int STUDENTID = 1;
@@ -33,6 +37,7 @@ public class GlobalInfo {
 		return infoList;
 	}
 	
+	//获取课程名数组
 	public static ArrayList<String> getProjectList() {
 		ArrayList<String> projectList = new ArrayList<>();
 		initialize();
@@ -51,6 +56,7 @@ public class GlobalInfo {
 		return projectList;
 	}
 	
+	
 	private static void initialize() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -61,9 +67,8 @@ public class GlobalInfo {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
 	private static void terminate() {
 		try {
 			aStatement.close();
@@ -73,6 +78,7 @@ public class GlobalInfo {
 		}
 	}
 	
+	//获取学生信息但不包括到课情况
 	public static class StudentInfo{
 		String studentID;
 		

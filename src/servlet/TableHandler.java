@@ -25,26 +25,25 @@ public class TableHandler extends HttpServlet {
 		ArrayList<GlobalInfo.StudentInfo> infoList = GlobalInfo.getStudentInfoList();
 		ArrayList<String> projectNameList = GlobalInfo.getProjectList();
 		
-		//���¼ѧ������йصı���
 		StudentInfo info;
 		Student student;
 		String name;
 		String studentID;
 		String mClass;
 		
-		//��¼��ǰ�ܴ�
+		//获取周次
 		int week = Integer.parseInt(req.getParameter("week"));
 		for(int i = 0; i < infoList.size(); i ++) {
 			
-			//��ȡһ��ѧ����Ϣ
+			//获取一条学生信息
 			info = infoList.get(i);
 			
-			//��ȡ��Ϣ����
+			//获取详情
 			name = info.getName();
 		    studentID = info.getStudentID();
 		    mClass = info.getClassName();
 		    
-		    //��¼ÿ��ѧ���ÿ�Ź��εĵ������
+		    //获取到课情况
 		    HashMap<String, Integer> attMap = new HashMap<>();
 		    for(int j = 0; j < projectNameList.size(); j++) {
 		    	
@@ -54,7 +53,7 @@ public class TableHandler extends HttpServlet {
 		    	System.out.println(req.getParameter(projectNameList.get(j) + i));
 		    }
 		    
-		    //�����浽��ݿ�
+		    //将学生添加到数据库
 		    try {
 				student = new Student(studentID, week, name, mClass, attMap);
 				Student.initialize();
@@ -66,7 +65,7 @@ public class TableHandler extends HttpServlet {
 			
 		}
 		
-		//��¼ÿ�Ź��ε��ܵ�ʵ�ʽ���
+		//将该周所有课程添加到数据库
 		Project.initialize();
 	    for(int j = 0; j < projectNameList.size(); j++ ) {
 	    	

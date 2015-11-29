@@ -6,11 +6,10 @@ import pd.User;
 
 public class UserDA {
 	private static User aUser;
-	//
+	
 	private static String url = "jdbc:mysql://localhost:3306/mydatabase";
 	private static Connection aConnection;
 	private static Statement aStatement;
-	//
 
 	private static String identity;
 	private static String userName;
@@ -38,6 +37,12 @@ public class UserDA {
 		}
 	}
 
+	/**
+	 * 查找该用户
+	 * @param name
+	 * @return
+	 * @throws NotFoundException
+	 */
 	public static User find(String name) throws NotFoundException {
 		
 		aUser = null;
@@ -65,6 +70,11 @@ public class UserDA {
 		return aUser;
 	}
 	
+	/**
+	 * 添加该用户
+	 * @param User
+	 * @throws DuplicateException
+	 */
 	public static void add(User User) throws DuplicateException {
 		
 		identity = User.getIdentity();

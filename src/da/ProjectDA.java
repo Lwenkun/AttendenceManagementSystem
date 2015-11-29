@@ -39,6 +39,13 @@ public class ProjectDA {
 		}
 	}
 	
+	/**
+	 * 根据课程名和周次查找某个课程的记录
+	 * @param projectName
+	 * @param week
+	 * @return
+	 * @throws NotFoundException
+	 */
 	public static Project find(String projectName, int week) throws NotFoundException {
 	
 		aProject = null;
@@ -66,6 +73,12 @@ public class ProjectDA {
 		return aProject;
 	}
 	
+	/**
+	 * 获取有该课程的所有周次
+	 * @param projectName
+	 * @return
+	 * @throws NotFoundException
+	 */
 	public static ArrayList<Integer> findForWeek(String projectName) throws NotFoundException {
 
 	      String sql = "SELECT week FROM projects WHERE name = '" + projectName + "'" ;
@@ -122,6 +135,11 @@ public class ProjectDA {
 		}
 	}
 
+	/**
+	 * 更新课程记录
+	 * @param project 
+	 * @throws NotFoundException
+	 */
 	public static void update(Project project) throws NotFoundException {
 		
 		name = project.getName();

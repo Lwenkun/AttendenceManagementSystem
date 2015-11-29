@@ -93,7 +93,7 @@ public class StudentDA {
 	}
 
 	/**
-	 * 
+	 * 添加某个学生的一条记录
 	 * @param aStudent
 	 * @throws DuplicateException
 	 */
@@ -131,7 +131,7 @@ public class StudentDA {
 	}
 
 	/**
-	 * 
+	 *更新某个学生某一周的到课情况
 	 * @param aStudent
 	 * @param week
 	 * @throws NotFoundException
@@ -146,7 +146,7 @@ public class StudentDA {
 		for(int i = 0; i < projectNameList.size(); i ++) {
 			att[i] = attMap.get(projectNameList.get(i));
 		}
-	//	Assembly,Oop,Data_Structure,Circuit _Theory,Physics,Complex_Function
+	
 		String sql = "UPDATE student SET "
 				+ "Assembly = '" + att[0] + "'," + "Oop = '"
 				+ att[1] + "'," + "Data_Structure = '" + att[2] + "'," + "Circuit_Theory = '" + att[3] + "',"
@@ -193,6 +193,50 @@ public class StudentDA {
 			e.printStackTrace();
 		}
 		return rates;
+	}
+	
+	/**
+	 * 根据学生ID查找该学生所有周次的记录
+	 * @param key
+	 * @return
+	 */
+	public static  ArrayList<Student> findStudents(String key) {
+		
+		studentID = key;
+		
+		ArrayList<Student> students = new ArrayList<Student>();
+		
+		System.out.println(studentID + "dad");
+		
+		String sql = "SELECT * FROM student WHERE studentid = '" + studentID + "'"; 
+		
+		System.out.println(sql);
+		
+		try {
+			ResultSet rs = aStatement.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				String name = rs.getString("name");
+				int week = rs.getInt("week");
+				String mClass = rs.getString("class");
+				ArrayList<String> projectNameList = GlobalInfo.getProjectList();
+				int att[] = new int[projectNameList.size()];
+				Map<String, Integer> attMap = new HashMap<>();
+				for(int i = 0; i < projectNameList.size(); i ++) {
+					
+					att[i] = rs.getInt(projectNameList.get(i));
+					attMap.put(projectNameList.get(i), att[i]);
+				}
+				
+				students.add(new Student(null, week, name, mClass, attMap));
+				
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return students;
 	}
 
 

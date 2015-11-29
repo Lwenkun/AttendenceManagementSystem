@@ -11,7 +11,7 @@ public class User {
 	
 	private String userName;
 	private String password;
-	//èº«ä»½ï¼ˆè€å¸ˆï¼Œç®¡ç†å‘˜ï¼Œè¾…å¯¼å‘˜ï¼‰
+	//ÓÃ»§Éí·İ£¬ÓĞ¹ÜÀíÔ±£¬ÀÏÊ¦£¬¸¨µ¼Ô±
 	private String identity;
 	
 	public User(String userName, String password, String identity) {
