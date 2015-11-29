@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <h1>华中科技大学考勤管理系统</h1>
     <form action="UpdateHandler" method="post">
     
-    <p>请选择学号：<select name="week">
+    <p>请选择周次：<select name="week">
     <%for(int i = 1; i <= 16; i ++) {%>
      <option value ="<%=i%>"><%=i %></option>
      <%} %>
