@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.genuitec.eclipse.j2eedt.core_10.5.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../Common/plugins/com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805" />
+      <root url="file://$PROJECT_DIR$/../../../Common/plugins/com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../Common/plugins/com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../Common/plugins/com.genuitec.eclipse.j2eedt.core_10.5.0.me201207171805" recursive="false" />
+  </library>
+</component>

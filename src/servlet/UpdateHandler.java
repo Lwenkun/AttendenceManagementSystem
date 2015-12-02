@@ -31,7 +31,7 @@ public class UpdateHandler extends HttpServlet {
 		}
 		int week = Integer.parseInt(req.getParameter("week"));
 		PrintWriter output = res.getWriter();
-		System.out.println(studentID + week);
+		//System.out.println(studentID + week);
 		try {
 			
 			Student student = new Student(studentID, week, null, null, attMap);
@@ -40,7 +40,7 @@ public class UpdateHandler extends HttpServlet {
 			student.update();
 			
 			output.println("<script type='text/javascript'>" +
-					"alert('Updata successfully!');" +
+					"alert('Update successfully!');" +
 					"window.location.href='" +
 					"http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/adminupdate.jsp" +
 					"';</script>");
@@ -48,7 +48,7 @@ public class UpdateHandler extends HttpServlet {
 		} catch(NotFoundException e) {
 			
 			output.println("<script type='text/javascript'>" +
-					"alert('Updata failed!');" +
+					"alert('Update failed!');" +
 					"window.location.href='" +
 					"http://desktop-6m41rij:8080/Attendance%20Management%20System/jsp/adminupdate.jsp" +
 					"';</script>");

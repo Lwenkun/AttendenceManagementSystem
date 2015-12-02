@@ -16,7 +16,6 @@ private int week;//周次
 private String name;//姓名
 private String mClass;//班级
 private Map<String, Integer> attMap;//课程
-private float attendenceRate;//出勤率
 
 public Student(String id, int week, String name, String mClass, Map<String, Integer> attMap) {
 	this.id = id;
@@ -47,10 +46,6 @@ public Map<String, Integer> getAttMap() {
 	return attMap;
 }
 
-public float getAttendenceRate() {
-	return attendenceRate;
-}
-
 public void setId(String id) {
 	this.id = id;
 }
@@ -63,9 +58,6 @@ public void setmClass(String mClass) {
 	this.mClass = mClass;
 }
 
-public static void calAttendenceRate() {
-	
-}
 
 public void add() throws DuplicateException {
 	StudentDA.add(this);

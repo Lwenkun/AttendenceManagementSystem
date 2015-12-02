@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="AttendenceManagementSystem:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/AttendenceManagementSystem_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="AttendenceManagementSystem" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="jdbc2_0-stdext.jar" module-name="AttendenceManagementSystem" />
+          <element id="library" level="module" name="mysql-connector-java-3.0.16-ga-bin.jar" module-name="AttendenceManagementSystem" />
+          <element id="library" level="module" name="proxool-0.8.3.jar" module-name="AttendenceManagementSystem" />
+          <element id="library" level="project" name="com.genuitec.eclipse.j2eedt.core_10.5.0" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="AttendenceManagementSystem/web/Web" />
+    </root>
+  </artifact>
+</component>

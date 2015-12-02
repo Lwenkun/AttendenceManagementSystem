@@ -127,7 +127,7 @@ public class Login extends HttpServlet {
 		    	ArrayList<Integer> rates = Student.findForCalProjRate(type, weeks.get(i));
 		    	int sum = 0;
 		        for(int j = 0; j < rates.size(); j ++) {
-		        	sum += rates.get(i);
+		        	sum += rates.get(j);
 		        }
 		        rate[i] = (float) sum / (float) should[i];
 		    }
